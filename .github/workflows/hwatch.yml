@@ -1,4 +1,4 @@
-name: H-WATCH Hourly Monitor
+name: H-WATCH 5-Minute Monitor
 
 on:
   workflow_dispatch:
