@@ -15,39 +15,20 @@ permissions:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deploy.outputs.page_url }}
-
+    environment: github-pages
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
       - name: Extract website
-      run: unzip -q hwatch-v3-free.zip -d site
-            - name: Extract website
         run: unzip -q hwatch-v3-free.zip -d site
 
-      - name: Update public data
-        run: |
-          cd site
-          python3 scripts/update.py
+      - name: Update public data and risk assessment
+        run: python3 site/scripts/update.py
 
-      - name: Configure Pages
-        uses: actions/configure-pages@v5
-      - name: Update public data
-        run: |
-          cd site
-          python3 scripts/update.py
+      - uses: actions/configure-pages@v5
 
-      - name: Configure Pages
-        uses: actions/configure-pages@v5
-
-      - name: Upload website
-        uses: actions/upload-pages-artifact@v4
+      - uses: actions/upload-pages-artifact@v4
         with:
           path: site
 
-      - name: Publish website
-        id: deploy
-        uses: actions/deploy-pages@v4
+      - uses: actions/deploy-pages@v4
