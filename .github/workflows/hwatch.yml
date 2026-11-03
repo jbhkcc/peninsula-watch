@@ -25,7 +25,8 @@ jobs:
 
       - name: Extract website
         run: unzip -q hwatch.zip -d site
-
+      - name: Reduce search indexing
+        run: sed -i 's#<head>#<head><meta name="robots" content="noindex,nofollow">#' site/index.html
       - name: Update public data
         run: |
           cd site
